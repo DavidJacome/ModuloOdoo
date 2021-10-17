@@ -1,0 +1,310 @@
+<odoo>
+  <data>
+<!-- open_academy.course form view -->
+    <record id="model_name_view_form" model="ir.ui.view">
+        <field name="name">open_academy.course.view.form</field>
+        <field name="model">open_academy.course</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <!-- Add your fields here -->
+                        <group colspan="2" col="2">
+                                <separator string="Datos Generales" colspan="2"/>
+                                <field name="name"/>
+                                <field name="users_id"/>
+                                
+                            </group>
+                            <notebook colspan="4">
+                                <page string="Description">
+                                    <field name="description" placeholder='Descripción rapida'/>
+                                </page>
+                            </notebook>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- open_academy.course tree view -->
+    <record id="course_view_tree" model="ir.ui.view">
+        <field name="name">open_academy.course.view.tree</field>
+        <field name="model">open_academy.course</field>
+        <field name="arch" type="xml">
+            <tree editable="top" multi_edit="1" default_order="name asc"> 
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="users_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- open_academy.course action window -->
+    <record id="Course_action" model="ir.actions.act_window">
+        <field name="name">Cursos</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">open_academy.course</field>
+        <field name="view_mode">tree,form</field>
+ 
+        <!-- <field name="view_type">form</field> -->
+        <field name="help" type="xml">
+            <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+            </p><p>
+                <!-- More details about what a user can do with this object will be OK --> 
+            </p>
+        </field>
+    </record>
+
+<!-- open_academy.sesion form view -->
+    <record id="sesion_view_form" model="ir.ui.view">
+      <field name="name">open_academy.sesion.view.form</field>
+      <field name="model">open_academy.sesion</field>
+      <field name="arch" type="xml">
+        <form string="">
+          <sheet>
+            <group>
+                <group colspan="2" col="2">
+                    <separator string="Creando sesión" colspan="2"/>
+                    <field name="sesions_id"/> 
+                    <field name="asistentes_id"/> 
+                    <field name="activo"/> 
+                    <field name="fecha"/>
+                    <field name="duracion"/>
+                    <field name="cantidadAsientos"/>
+                    <field name="porcentajeAsientos" widget="progressbar"/> 
+                </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+    
+    <!-- open_academy.sesion graph view -->
+    <record id="graph_view_graph" model="ir.ui.view">
+        <field name="name">open_academy.sesion.view.graph</field>
+        <field name="model">open_academy.sesion</field>
+        <field name="arch" type="xml">
+            <graph string="Graph Description">
+                <field name="cantidadAsientos"/>
+                <!-- <field name="course_id"/> -->
+            </graph>
+        </field>
+    </record>
+
+
+    <!-- open_academy_graph action window -->
+    <record id="graph_action" model="ir.actions.act_window">
+        <field name="name">Grafico</field>
+        <field name="type">ir.actions.act_window</field>
+        <!-- <field name="res_model">open_academy.sesion</field> -->
+        <field name="view_mode">tree,graph,form</field>
+
+        <field name="help" type="xml">
+            <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+            </p><p>
+                <!-- More details about what a user can do with this object will be OK --> 
+            </p>
+        </field>
+    </record>
+
+
+    <!-- 
+    <record id="programacion_sesiones_view_gantt" model="ir.ui.view">
+        <field name="name">Programacion Sesiones</field>
+        <field name="model">open_academy.sesion</field>
+        <field name="arch" type="xml">
+            <gantt string="programacion_sesiones_gantt" date_start="fecha"
+            date_stop="fecha"
+            default_group_by="sesion_id"/>
+                <field name="fecha"/>
+                <field name="fecha"/>
+            </gantt>
+        </field>
+    </record>
+    
+    <record id="gantt_action" model="ir.actions.act_window">
+        <field name="name">Diagrama de Gant</field>
+        <field name="type">ir.actions.act_window</field>
+        
+        <field name="view_mode">gantt, tree, form</field>
+    </record> -->
+
+    <!-- open_academy_sesion calendar view -->
+    <record id="open_academy_sesion_view_calendar" model="ir.ui.view">
+        <field name="name">Calendar</field>
+        <!-- <field name="model">open_academy.sesion</field> -->
+        <field name="arch" type="xml">
+            <calendar string="view_calendar_activities" date_start="fecha" color="sesions_id">
+                    <field name="cantidadAsientos"/> 
+            </calendar>
+        </field>
+    </record>
+
+    <!-- open_academy_calendar action window -->
+    <record id="calendar_action" model="ir.actions.act_window">
+        <field name="name">Calendario</field>
+        <field name="type">ir.actions.act_window</field>
+        <!-- <field name="res_model">open_academy.sesion</field> -->
+        <field name="view_mode">calendar,tree,form</field>
+
+        <field name="help" type="xml">
+            <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+            </p><p>
+                <!-- More details about what a user can do with this object will be OK --> 
+            </p>
+        </field>
+    </record>
+
+    <!-- open_academy.sesion tree view -->
+    <record id="sesion_view_tree" model="ir.ui.view">
+        <field name="name">open_academy.sesion.view.tree</field>
+        <field name="model">open_academy.sesion</field>
+        <field name="arch" type="xml">
+            <tree string="Sesion Tree" decoration-bf="duracion&lt;5" decoration-it="duracion&lt;15">
+                    <field name="sesions_id"/>
+                    <field name="activo"/> 
+                    <field name="fecha"/>
+                    <field name="duracion" invisible="1"/>
+                    <field name="cantidadAsientos"/>
+                    <field name="porcentajeAsientos" widget="progressbar"/> 
+                    <field name="asistentes_id"/>           
+            </tree>
+        </field>
+    </record>
+
+    <!-- open_academy.sesion action window -->
+    <record id="sesion_action" model="ir.actions.act_window">
+        <field name="name">Sesion</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">open_academy.sesion</field>
+        <field name="view_mode">tree,form</field>
+ 
+        <!-- <field name="view_type">form</field> -->
+        <field name="help" type="xml">
+            <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+            </p><p>
+                <!-- More details about what a user can do with this object will be OK --> 
+            </p>
+        </field>
+    </record>
+
+
+<!-- open_academy.users form view -->
+    <record id="users_view_form" model="ir.ui.view">
+      <field name="name">open_academy.users.view.form</field>
+      <field name="model">open_academy.users</field>
+      <field name="arch" type="xml">
+        <form string="">
+          <sheet>
+            <group>
+                <group colspan="2" col="2">
+                    <separator string="Ususario Responsable" colspan="2"/>
+                    <field name="name"/>
+                </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="users_view_tree" model="ir.ui.view">
+        <field name="name">open_academy.users.view.tree</field>
+        <field name="model">open_academy.users</field>
+        <field name="arch" type="xml">
+            <tree>
+                    <field name="name"/>
+            </tree>
+        </field>
+    </record>
+    
+    <record id="users_action" model="ir.actions.act_window">
+        <field name="name">Users</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">open_academy.users</field>
+        <field name="view_mode">tree,form</field>
+ 
+        <!-- <field name="view_type">form</field> -->
+        <field name="help" type="xml">
+            <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+            </p><p>
+                <!-- More details about what a user can do with this object will be OK --> 
+            </p>
+        </field>
+    </record>
+    
+<!-- open_academy.socio form view -->
+    <record id="socio_view_form" model="ir.ui.view">
+      <field name="name">open_academy.socio.view.form</field>
+      <field name="model">open_academy.socio</field>
+      <!-- <field name="inherit_id" ref="open_academy.sesion_view_form"/> -->
+      <field name="arch" type="xml">
+        <form string="">
+          <sheet>
+            <group>
+                 <group colspan="2" col="2">
+                    <separator string="Users" colspan="2"/>
+                    <field name="name"/>
+                    <field name="instructor"/>
+                </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="socio_view_tree" model="ir.ui.view">
+        <field name="name">open_academy.socio.view.tree</field>
+        <field name="model">open_academy.socio</field>
+        <field name="arch" type="xml">
+            <tree>
+                    <field name="name"/>
+                    <field name="instructor"/>
+            </tree>
+        </field>
+    </record>
+    
+    <record id="socio_action" model="ir.actions.act_window">
+        <field name="name">socio</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">open_academy.socio</field>
+        <field name="view_mode">tree,form</field>
+ 
+        <!-- <field name="view_type">form</field> -->
+        <field name="help" type="xml">
+            <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+            </p><p>
+                <!-- More details about what a user can do with this object will be OK --> 
+            </p>
+        </field>
+    </record>
+
+<!-- This Menu Item will appear in the Upper bar, that's why It needs NO parent or action -->
+    <menuitem id="open_academy_menu_root" name="Open Academy" sequence="10"/>
+    <menuitem id="opciones_menu_categ" name="Opciones" parent = "open_academy_menu_root"/>
+
+    
+    <menuitem id="course_menu_act" name="Cursos" parent="opciones_menu_categ" action="Course_action"/>
+    <menuitem id="sesion_menu_act" name="Sesiones" 
+    parent="opciones_menu_categ" action="sesion_action"/>
+    <menuitem id="users_menu_act" name="Usuarios" 
+    parent="opciones_menu_categ" action="users_action"/>
+    <menuitem id="socio_menu_act" name="socio" 
+    parent="opciones_menu_categ" action="socio_action"/>
+
+    <menuitem id="calendar_men_act" name="calendar" 
+    parent="opciones_menu_categ" action="calendar_action"/>
+
+    <menuitem id="calendar_men_act" name="calendar" 
+    parent="opciones_menu_categ" action="calendar_action"/>
+
+    <menuitem id="graph_men_act" name="graph" 
+    parent="opciones_menu_categ" action="graph_action"/>
+
+  </data>
+</odoo>
