@@ -80,34 +80,22 @@
       </field>
     </record>
     
-    <!-- open_academy.sesion graph view -->
-    <record id="graph_view_graph" model="ir.ui.view">
+    <!-- <record id="graph_view_graph" model="ir.ui.view">
         <field name="name">open_academy.sesion.view.graph</field>
         <field name="model">open_academy.sesion</field>
         <field name="arch" type="xml">
             <graph string="Graph Description">
                 <field name="cantidadAsientos"/>
-                <!-- <field name="course_id"/> -->
             </graph>
         </field>
     </record>
 
-
-    <!-- open_academy_graph action window -->
     <record id="graph_action" model="ir.actions.act_window">
         <field name="name">Grafico</field>
         <field name="type">ir.actions.act_window</field>
-        <!-- <field name="res_model">open_academy.sesion</field> -->
         <field name="view_mode">tree,graph,form</field>
 
-        <field name="help" type="xml">
-            <p class="oe_view_nocontent_create">
-                <!-- Add Text Here -->
-            </p><p>
-                <!-- More details about what a user can do with this object will be OK --> 
-            </p>
-        </field>
-    </record>
+    </record> -->
 
 
     <!-- 
@@ -303,8 +291,8 @@
     <menuitem id="calendar_men_act" name="calendar" 
     parent="opciones_menu_categ" action="calendar_action"/>
 
-    <menuitem id="graph_men_act" name="graph" 
-    parent="opciones_menu_categ" action="graph_action"/>
+    <!-- <menuitem id="graph_men_act" name="graph" 
+    parent="opciones_menu_categ" action="graph_action"/> -->
 
   </data>
 </odoo>
